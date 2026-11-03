@@ -14,16 +14,16 @@
 
     if (!form.reportValidity()) return;
 
-  const name = form.elements.namedItem("name").value.trim();
-const phone = form.elements.namedItem("phone").value.trim();
-const details = form.elements.namedItem("details").value.trim();
+    const name = form.elements.namedItem("name").value.trim();
+    const phone = form.elements.namedItem("phone").value.trim();
+    const details = form.elements.namedItem("details").value.trim();
 
-const consent = form.elements.namedItem("personalDataConsent");
+    const consent = form.elements.namedItem("personalDataConsent");
 
-if (!consent || !consent.checked) {
-  message.textContent = "Необходимо дать согласие на обработку персональных данных.";
-  return;
-}
+    if (!consent || !consent.checked) {
+      message.textContent = "Необходимо дать согласие на обработку персональных данных.";
+      return;
+    }
 
     if (!name || !phone || !details) {
       message.textContent = "Заполните все поля.";
@@ -31,13 +31,19 @@ if (!consent || !consent.checked) {
     }
 
     message.textContent = "Отправляем заявку...";
+
     if (submitButton) submitButton.disabled = true;
 
     try {
       const response = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, details, consent: consent.checked })
+        body: JSON.stringify({
+          name,
+          phone,
+          details,
+          consent: consent.checked
+        })
       });
 
       const result = await response.json();
@@ -48,15 +54,16 @@ if (!consent || !consent.checked) {
 
       message.textContent = "Заявка успешно отправлена!";
       form.reset();
+
     } catch (error) {
       console.error("Ошибка отправки:", error);
       message.textContent = "Не удалось отправить заявку. Попробуйте ещё раз.";
+
     } finally {
       if (submitButton) submitButton.disabled = false;
     }
   });
 })();
-
 /* =========================================================
    Универсальная карусель (отзывы и работы)
    ========================================================= */
