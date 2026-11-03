@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Очаг — сварка, металлоконструкции, ворота, заборы, лестницы и изготовление деталей по чертежам в Оренбурге.">
   <title>Очаг — металлоконструкции в Оренбурге</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,6 +27,8 @@
   </header>
 
   <main>
+
+    <!-- Главный экран -->
     <section class="hero">
       <div class="hero-content">
         <p class="eyebrow">МЕТАЛЛООБРАБОТКА · ОРЕНБУРГ</p>
@@ -51,227 +56,269 @@
         </div>
       </div>
 
-      
-<div class="hero-visual hero-photo">
-  <div class="image-placeholder">
-    <span>ОЧАГ / 001</span>
-    <p>МЕТАЛЛ В НАДЁЖНЫХ РУКАХ</p>
-  </div>
+      <div class="hero-background" aria-hidden="true">
+  <div class="hero-image active" style="background-image: url('images/img8.jpg')"></div>
+  <div class="hero-image" style="background-image: url('images/img9.jpg')"></div>
+  <div class="hero-image" style="background-image: url('images/img10.jpg')"></div>
+  <div class="hero-overlay"></div>
 </div>
-
-    </section>
-<section class="master" id="master">
-  <div class="master-container">
-
-    <div class="master-photo">
-      <img
-        src="Мастер в форме механика.png"
-        alt="Егор — мастер мастерской Очаг"
-      >
-    </div>
-
-    <div class="master-content">
-      <span class="section-label">КОМАНДА МАСТЕРСКОЙ</span>
-      <h2>О мастере</h2>
-
-      <h3>Егор — мастер своего дела</h3>
-
-      <p class="master-intro">
-        «Сначала я думал, что металл — это просто.
-        Оказалось, это характер».
-      </p>
-
-      <p>
-        Егор уже три года работает с металлом: варит, гнёт,
-        режет и собирает конструкции разной сложности.
-        Начинал с небольших гаражных проектов, постепенно
-        перешёл к заборам, навесам и лестницам.
-      </p>
-
-      <p>
-        Он рассчитывает нагрузки, продумывает соединения
-        и уделяет внимание деталям, от которых зависит
-        надёжность конструкции.
-      </p>
-
-      <p>
-        Егор не берётся за сомнительные и небезопасные решения.
-        Если выбранный вариант не подходит, он объяснит почему
-        и предложит другой.
-      </p>
-
-      <blockquote>
-        «Я не делаю вечных вещей. Я делаю вещи,
-        которые прослужат дольше меня».
-      </blockquote>
-    </div>
-
-  </div>
-  <section class="works section" id="works-gallery">
-  <div class="works-container">
-    <span class="section-label">МАСТЕРСТВО В ДЕТАЛЯХ</span>
-    <h2>Наши работы</h2>
-
-    <div class="works-carousel">
-      <button class="works-arrow prev" type="button" aria-label="Предыдущая работа">
-        &#10094;
-      </button>
-
-      <div class="works-window">
-        <div class="works-track">
-          <div class="work-slide"><img src="images/img1.jpg" alt="Работа мастерской Очаг 1"></div>
-          <div class="work-slide"><img src="images/img2.jpg" alt="Работа мастерской Очаг 2"></div>
-          <div class="work-slide"><img src="images/img3.jpg" alt="Работа мастерской Очаг 3"></div>
-          <div class="work-slide"><img src="images/img4.jpg" alt="Работа мастерской Очаг 4"></div>
-          <div class="work-slide"><img src="images/img5.jpg" alt="Работа мастерской Очаг 5"></div>
-          <div class="work-slide"><img src="images/img6.jpg" alt="Работа мастерской Очаг 6"></div>
-          <div class="work-slide"><img src="images/img7.jpg" alt="Работа мастерской Очаг 7"></div>
-        </div>
-      </div>
-
-      <button class="works-arrow next" type="button" aria-label="Следующая работа">
-        &#10095;
-      </button>
-    </div>
-
-    <div class="works-dots"></div>
-  </div>
 </section>
-</section>
-    <section class="services section" id="services">
-      <p class="eyebrow">ЧТО МЫ ДЕЛАЕМ</p>
-      <h2>Работаем с металлом<br>под ваши задачи.</h2>
+
+<!-- Услуги -->
+<section class="services section" id="services">
+      <p class="eyebrow">ЧЕМ МЫ ЗАНИМАЕМСЯ</p>
+      <h2>Услуги</h2>
 
       <div class="service-grid">
         <article class="service-card">
-          <span>01 / СВАРКА</span>
+          <span>01</span>
           <h3>Сварочные работы</h3>
-          <p>Соединение металлических деталей и конструкций.</p>
-          <a href="#request">Обсудить заказ ↗</a>
+          <p>Сварка конструкций любой сложности: каркасы, рамы, основания и опоры.</p>
+          <a href="#request">Обсудить ↗</a>
         </article>
 
         <article class="service-card">
-          <span>02 / КОНСТРУКЦИИ</span>
+          <span>02</span>
           <h3>Металлоконструкции</h3>
-          <p>Изготовление конструкций по вашим размерам.</p>
-          <a href="#request">Обсудить заказ ↗</a>
+          <p>Навесы, козырьки, каркасы и другие конструкции с расчётом нагрузок.</p>
+          <a href="#request">Обсудить ↗</a>
         </article>
 
         <article class="service-card">
-          <span>03 / ДЛЯ ДОМА</span>
+          <span>03</span>
           <h3>Ворота и заборы</h3>
-          <p>Металлические ограждения и въездные группы.</p>
-          <a href="#request">Обсудить заказ ↗</a>
+          <p>Распашные и откатные ворота, калитки, заборы и ограждения.</p>
+          <a href="#request">Обсудить ↗</a>
         </article>
 
         <article class="service-card">
-          <span>04 / ИНТЕРЬЕР</span>
-          <h3>Лестницы и перила</h3>
-          <p>Металлические лестничные конструкции и ограждения.</p>
-          <a href="#request">Обсудить заказ ↗</a>
+          <span>04</span>
+          <h3>Лестницы</h3>
+          <p>Металлические лестницы и перила для дома, гаража и производства.</p>
+          <a href="#request">Обсудить ↗</a>
         </article>
 
         <article class="service-card">
-          <span>05 / ОБРАБОТКА</span>
-          <h3>Резка металла</h3>
-          <p>Подготовка металлических заготовок для ваших проектов.</p>
-          <a href="#request">Обсудить заказ ↗</a>
+          <span>05</span>
+          <h3>Детали по чертежам</h3>
+          <p>Резка, гибка и изготовление деталей по вашим чертежам и эскизам.</p>
+          <a href="#request">Обсудить ↗</a>
         </article>
 
         <article class="service-card">
-          <span>06 / ПО ЧЕРТЕЖАМ</span>
-          <h3>Детали на заказ</h3>
-          <p>Изготовление деталей по чертежам и согласованным эскизам.</p>
-          <a href="#request">Обсудить заказ ↗</a>
+          <span>06</span>
+          <h3>Нестандартные задачи</h3>
+          <p>Расскажите, что нужно сделать, и мы предложим безопасное решение.</p>
+          <a href="#request">Обсудить ↗</a>
         </article>
       </div>
     </section>
 
-<section class="reviews section" id="works">
-  <p class="eyebrow">МНЕНИЕ НАШИХ КЛИЕНТОВ</p>
-  <h2>Нам доверяют. Нас рекомендуют.</h2>
+    <!-- О мастере -->
+    <section class="master" id="master">
+      <div class="master-container">
 
-  <div class="reviews-carousel">
+        <div class="master-photo">
+          <img
+            src="master.png"
+            alt="Егор — мастер мастерской Очаг"
+            loading="lazy"
+          >
+        </div>
 
-    <button class="reviews-arrow prev" type="button" aria-label="Предыдущий отзыв">
+        <div class="master-content">
+          <h2>О мастере</h2>
+
+          <h3>Егор — мастер своего дела</h3>
+
+          <p class="master-intro">
+            «Сначала я думал, что металл — это просто.
+            Оказалось, это характер».
+          </p>
+
+          <p>
+            Егор уже три года работает с металлом: варит, гнёт,
+            режет и собирает конструкции разной сложности.
+            Начинал с небольших гаражных проектов, постепенно
+            перешёл к заборам, навесам и лестницам.
+          </p>
+
+          <p>
+            Он рассчитывает нагрузки, продумывает соединения
+            и уделяет внимание деталям, от которых зависит
+            надёжность конструкции.
+          </p>
+
+          <p>
+            Егор не берётся за сомнительные и небезопасные решения.
+            Если выбранный вариант не подходит, он объяснит почему
+            и предложит другой.
+          </p>
+
+          <blockquote>
+            «Я не делаю вечных вещей. Я делаю вещи,
+            которые прослужат дольше меня».
+          </blockquote>
+        </div>
+
+      </div>
+    </section>
+
+<!-- Наши работы -->
+<section class="works section" id="works">
+  <p class="eyebrow">МАСТЕРСТВО В ДЕТАЛЯХ</p>
+<h2>Наши работы</h2>
+
+  <div class="works-carousel">
+    <button class="works-arrow prev" type="button" aria-label="Предыдущая работа">
       &#10094;
     </button>
 
-    <div class="reviews-window">
-      <div class="reviews-track">
-        <div class="review-slide">
-          <img src="reviews/review1.jpg" alt="Отзыв клиента 1">
-        </div>
-        <div class="review-slide">
-          <img src="reviews/review2.jpg" alt="Отзыв клиента 2">
-        </div>
-        <div class="review-slide">
-          <img src="reviews/review3.jpg" alt="Отзыв клиента 3">
-        </div>
-        <div class="review-slide">
-          <img src="reviews/review4.jpg" alt="Отзыв клиента 4">
-        </div>
-        <div class="review-slide">
-          <img src="reviews/review5.jpg" alt="Отзыв клиента 5">
-        </div>
+    <div class="works-window">
+      <div class="works-track">
+        <div class="work-slide"><img src="images/img1.jpg" alt="Работа мастерской Очаг 1"></div>
+        <div class="work-slide"><img src="images/img2.jpg" alt="Работа мастерской Очаг 2"></div>
+        <div class="work-slide"><img src="images/img3.jpg" alt="Работа мастерской Очаг 3"></div>
+        <div class="work-slide"><img src="images/img4.jpg" alt="Работа мастерской Очаг 4"></div>
+        <div class="work-slide"><img src="images/img5.jpg" alt="Работа мастерской Очаг 5"></div>
+        <div class="work-slide"><img src="images/img6.jpg" alt="Работа мастерской Очаг 6"></div>
+        <div class="work-slide"><img src="images/img7.jpg" alt="Работа мастерской Очаг 7"></div>
       </div>
     </div>
 
-    <button class="reviews-arrow next" type="button" aria-label="Следующий отзыв">
+    <button class="works-arrow next" type="button" aria-label="Следующая работа">
       &#10095;
     </button>
-
   </div>
 
-  <div class="reviews-dots"></div>
+  <div class="works-dots"></div>
 </section>
+    <!-- Отзывы -->
+    <section class="reviews section" id="reviews">
+      <p class="eyebrow">МНЕНИЕ НАШИХ КЛИЕНТОВ</p>
+      <h2>Нам доверяют. Нас рекомендуют.</h2>
 
+      <div class="reviews-carousel">
+
+        <button class="reviews-arrow prev" type="button" aria-label="Предыдущий отзыв">
+          &#10094;
+        </button>
+
+        <div class="reviews-window">
+          <div class="reviews-track">
+            <div class="review-slide">
+              <img src="reviews/review1.jpg" alt="Отзыв клиента 1">
+            </div>
+            <div class="review-slide">
+              <img src="reviews/review2.jpg" alt="Отзыв клиента 2">
+            </div>
+            <div class="review-slide">
+              <img src="reviews/review3.jpg" alt="Отзыв клиента 3">
+            </div>
+            <div class="review-slide">
+              <img src="reviews/review4.jpg" alt="Отзыв клиента 4">
+            </div>
+            <div class="review-slide">
+              <img src="reviews/review5.jpg" alt="Отзыв клиента 5">
+            </div>
+          </div>
+        </div>
+
+        <button class="reviews-arrow next" type="button" aria-label="Следующий отзыв">
+          &#10095;
+        </button>
+
+      </div>
+
+      <div class="reviews-dots"></div>
+    </section>
+
+    <!-- Заявка -->
     <section class="request section" id="request">
       <p class="eyebrow">ЕСТЬ ЗАДАЧА?</p>
       <h2>Давайте обсудим<br>ваш проект.</h2>
       <p>Расскажите, что нужно изготовить, —
         обсудим детали и возможность выполнения заказа.</p>
 
-      <form id="request-form">
-        <input name="name" placeholder="Ваше имя" required>
-        <input name="phone" type="tel" placeholder="Телефон" required>
-        <textarea name="details" placeholder="Что необходимо изготовить?" required></textarea>
-        <button class="button-primary" type="submit">
-          Отправить заявку ↗
-        </button>
-        <p id="form-message" aria-live="polite"></p>
-      </form>
+
+<form id="request-form" novalidate>
+  <input name="name" placeholder="Ваше имя" autocomplete="name" required>
+
+  <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" required>
+
+  <textarea name="details" placeholder="Что необходимо изготовить?" required></textarea>
+
+  <label class="consent-checkbox">
+    <input
+      type="checkbox"
+      name="personalDataConsent"
+      required
+    >
+    <span>
+      Я согласен(на) на
+      <a href="consent.html" target="_blank" rel="noopener noreferrer">
+        обработку персональных данных
+      </a>
+      и ознакомлен(а) с
+      <a href="privacy.html" target="_blank" rel="noopener noreferrer">
+        политикой обработки персональных данных
+      </a>.
+    </span>
+  </label>
+
+  <button class="button-primary" type="submit">
+    Отправить заявку ↗
+  </button>
+
+  <p id="form-message" aria-live="polite"></p>
+</form>
+
     </section>
+
   </main>
+
+
+
+
+<!-- Контакты -->
 <section class="contacts" id="contacts">
   <div class="contacts-container">
+
     <div class="contacts-heading">
       <span>МЫ НА СВЯЗИ</span>
       <h2>Контакты</h2>
     </div>
 
     <div class="contacts-item">
+      <span>МАСТЕР</span>
+      <p>Марков Егор Владимирович</p>
+    </div>
+
+    <div class="contacts-item">
       <span>ТЕЛЕФОН</span>
-      <a href="tel:+79890000000">+7 (989) 000-00-00</a>
+      <a href="tel:+79094775816">8 909 477-58-16</a>
+    </div>
+
+    <div class="contacts-item">
+      <span>ЭЛЕКТРОННАЯ ПОЧТА</span>
+      <a href="mailto:Mr.juzhev.vv@gmail.com">
+        Mr.juzhev.vv@gmail.com
+      </a>
+    </div>
+
+    <div class="contacts-item">
+      <span>ИНН</span>
+      <p>561004195107</p>
     </div>
 
     <div class="contacts-item">
       <span>НАША СТРАНИЦА В ВК</span>
-      <a href="https://vk.ru/ot_ochaga_d_pamyati" target="_blank" rel="noopener noreferrer">От очага до памяти</a>
+      <a href="https://vk.ru/ot_ochaga_d_pamyati"
+         target="_blank"
+         rel="noopener noreferrer">
+        От очага до памяти
+      </a>
     </div>
 
-    <div class="contacts-item">
-      <span>АДРЕС</span>
-      <p>ул. Пушкина, дом Колотушкина</p>
-    </div>
   </div>
 </section>
-
-<footer>
-  <a class="logo" href="#">ОЧАГ<span>.</span></a>
-  <p>Изделия из металла · Оренбург</p>
-</footer>
-
-  <script src="script.js"></script>
-</body>
-</html>

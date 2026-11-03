@@ -1,183 +1,288 @@
+/* =========================================================
+   Форма заявки
+   ========================================================= */
+(() => {
+  const form = document.querySelector("#request-form");
+  const message = document.querySelector("#form-message");
 
-const form = document.querySelector("#request-form");
-const message = document.querySelector("#form-message");
+  if (!form || !message) return;
 
-form.addEventListener("submit", async function (event) {
-  event.preventDefault();
+  const submitButton = form.querySelector('button[type="submit"]');
 
-  if (!form.reportValidity()) {
-    return;
-  }
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-  const name = form.elements.name.value.trim();
-  const phone = form.elements.phone.value.trim();
-  const details = form.elements.details.value.trim();
+    if (!form.reportValidity()) return;
 
-  if (!name || !phone || !details) {
-    message.textContent = "Заполните все поля.";
-    return;
-  }
+  const name = form.elements.namedItem("name").value.trim();
+const phone = form.elements.namedItem("phone").value.trim();
+const details = form.elements.namedItem("details").value.trim();
 
-  message.textContent = "Отправляем заявку...";
+const consent = form.elements.namedItem("personalDataConsent");
 
-  try {
-    const response = await fetch("/api/booking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        phone,
-        details
-      })
-    });
+if (!consent || !consent.checked) {
+  message.textContent = "Необходимо дать согласие на обработку персональных данных.";
+  return;
+}
 
-    const result = await response.json();
-
-    if (!response.ok || !result.success) {
-      throw new Error(result.message || "Ошибка отправки");
+    if (!name || !phone || !details) {
+      message.textContent = "Заполните все поля.";
+      return;
     }
 
-    message.textContent = "Заявка успешно отправлена!";
-    form.reset();
+    message.textContent = "Отправляем заявку...";
+    if (submitButton) submitButton.disabled = true;
 
-  } catch (error) {
-    console.error("Ошибка отправки:", error);
-    message.textContent =
-      "Не удалось отправить заявку. Попробуйте ещё раз.";
-  }
-});
-// Карусель отзывов
-const reviewsTrack = document.querySelector(".reviews-track");
-const reviewSlides = document.querySelectorAll(".review-slide");
-const prevReviewButton = document.querySelector(".reviews-arrow.prev");
-const nextReviewButton = document.querySelector(".reviews-arrow.next");
-const reviewsDotsContainer = document.querySelector(".reviews-dots");
+    try {
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, details, consent: consent.checked })
+      });
 
-if (
-  reviewsTrack &&
-  reviewSlides.length &&
-  prevReviewButton &&
-  nextReviewButton &&
-  reviewsDotsContainer
-) {
-  let currentReview = 0;
-  const dots = [];
+      const result = await response.json();
 
-  reviewSlides.forEach((_, index) => {
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Ошибка отправки");
+      }
+
+      message.textContent = "Заявка успешно отправлена!";
+      form.reset();
+    } catch (error) {
+      console.error("Ошибка отправки:", error);
+      message.textContent = "Не удалось отправить заявку. Попробуйте ещё раз.";
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+})();
+
+/* =========================================================
+   Универсальная карусель (отзывы и работы)
+   ========================================================= */
+function createCarousel({ track, slides, prev, next, dotsContainer, swipeArea, dotLabel }) {
+  if (!track || !slides.length || !prev || !next || !dotsContainer || !swipeArea) return;
+
+  let current = 0;
+
+  const dots = Array.from(slides, (_, index) => {
     const dot = document.createElement("button");
     dot.type = "button";
-    dot.setAttribute("aria-label", `Перейти к отзыву ${index + 1}`);
-
-    dot.addEventListener("click", () => showReview(index));
-
-    reviewsDotsContainer.appendChild(dot);
-    dots.push(dot);
+    dot.setAttribute("aria-label", `${dotLabel} ${index + 1}`);
+    dot.addEventListener("click", () => show(index));
+    dotsContainer.appendChild(dot);
+    return dot;
   });
 
-  function showReview(index) {
-    currentReview = (index + reviewSlides.length) % reviewSlides.length;
-
-    reviewsTrack.style.transform =
-      `translateX(-${currentReview * 100}%)`;
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
 
     dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle("active", dotIndex === currentReview);
+      dot.classList.toggle("active", dotIndex === current);
     });
   }
 
-  prevReviewButton.addEventListener("click", () => {
-    showReview(currentReview - 1);
-  });
+  prev.addEventListener("click", () => show(current - 1));
+  next.addEventListener("click", () => show(current + 1));
 
-  nextReviewButton.addEventListener("click", () => {
-    showReview(currentReview + 1);
-  });
+  // Свайп на телефоне (учитываем только горизонтальные жесты)
+  let startX = 0;
+  let startY = 0;
 
-  let touchStartX = 0;
-  const reviewsWindow = document.querySelector(".reviews-window");
-
-  reviewsWindow.addEventListener("touchstart", event => {
-    touchStartX = event.changedTouches[0].screenX;
+  swipeArea.addEventListener("touchstart", (event) => {
+    startX = event.changedTouches[0].clientX;
+    startY = event.changedTouches[0].clientY;
   }, { passive: true });
 
-  reviewsWindow.addEventListener("touchend", event => {
-    const touchEndX = event.changedTouches[0].screenX;
-    const difference = touchStartX - touchEndX;
+  swipeArea.addEventListener("touchend", (event) => {
+    const dx = startX - event.changedTouches[0].clientX;
+    const dy = startY - event.changedTouches[0].clientY;
 
-    if (Math.abs(difference) > 50) {
-      showReview(currentReview + (difference > 0 ? 1 : -1));
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      show(current + (dx > 0 ? 1 : -1));
     }
   }, { passive: true });
 
-  showReview(0);
+  show(0);
 }
+
+// Карусель отзывов
+createCarousel({
+  track: document.querySelector(".reviews-track"),
+  slides: document.querySelectorAll(".review-slide"),
+  prev: document.querySelector(".reviews-arrow.prev"),
+  next: document.querySelector(".reviews-arrow.next"),
+  dotsContainer: document.querySelector(".reviews-dots"),
+  swipeArea: document.querySelector(".reviews-window"),
+  dotLabel: "Перейти к отзыву"
+});
 
 // Карусель наших работ
-const worksTrack = document.querySelector(".works-track");
-const workSlides = document.querySelectorAll(".work-slide");
-const prevWorksButton = document.querySelector(".works-arrow.prev");
-const nextWorksButton = document.querySelector(".works-arrow.next");
-const worksDotsContainer = document.querySelector(".works-dots");
-const worksWindow = document.querySelector(".works-window");
+createCarousel({
+  track: document.querySelector(".works-track"),
+  slides: document.querySelectorAll(".work-slide"),
+  prev: document.querySelector(".works-arrow.prev"),
+  next: document.querySelector(".works-arrow.next"),
+  dotsContainer: document.querySelector(".works-dots"),
+  swipeArea: document.querySelector(".works-window"),
+  dotLabel: "Перейти к работе"
+});
 
-if (
-  worksTrack &&
-  workSlides.length &&
-  prevWorksButton &&
-  nextWorksButton &&
-  worksDotsContainer &&
-  worksWindow
-) {
-  let currentWork = 0;
-  const worksDots = [];
+/* =========================================================
+   Смена фоновых изображений первого экрана
+   ========================================================= */
+(() => {
+  const images = document.querySelectorAll(".hero-image");
 
-  workSlides.forEach((_, index) => {
-    const dot = document.createElement("button");
+  if (images.length < 2) return;
 
-    dot.type = "button";
-    dot.setAttribute("aria-label", `Перейти к работе ${index + 1}`);
+  let currentIndex = 0;
 
-    dot.addEventListener("click", () => showWork(index));
+  setInterval(() => {
+    images[currentIndex].classList.remove("active");
 
-    worksDotsContainer.appendChild(dot);
-    worksDots.push(dot);
-  });
+    currentIndex = (currentIndex + 1) % images.length;
 
-  function showWork(index) {
-    currentWork = (index + workSlides.length) % workSlides.length;
+    images[currentIndex].classList.add("active");
+  }, 3000);
+})();
+/* =========================================================
+   Анимация сварочных искр в заголовке работ
+   ========================================================= */
+(() => {
+  const heading = document.querySelector("#works-heading");
+  const canvas = heading?.querySelector(".welding-sparks");
 
-    worksTrack.style.transform =
-      `translateX(-${currentWork * 100}%)`;
+  if (!heading || !canvas) return;
 
-    worksDots.forEach((dot, dotIndex) => {
-      dot.classList.toggle("active", dotIndex === currentWork);
-    });
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reducedMotion) {
+    heading.classList.add("revealed");
+    return;
   }
 
-  prevWorksButton.addEventListener("click", () => {
-    showWork(currentWork - 1);
-  });
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let animationFrame = null;
+  let started = false;
+  let startTime = 0;
 
-  nextWorksButton.addEventListener("click", () => {
-    showWork(currentWork + 1);
-  });
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-  let worksTouchStartX = 0;
+    width = rect.width;
+    height = rect.height;
 
-  worksWindow.addEventListener("touchstart", event => {
-    worksTouchStartX = event.changedTouches[0].screenX;
-  }, { passive: true });
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
 
-  worksWindow.addEventListener("touchend", event => {
-    const worksTouchEndX = event.changedTouches[0].screenX;
-    const difference = worksTouchStartX - worksTouchEndX;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
 
-    if (Math.abs(difference) > 50) {
-      showWork(currentWork + (difference > 0 ? 1 : -1));
+  function createSpark() {
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 2 + Math.random() * 6;
+    const life = 25 + Math.random() * 35;
+
+    return {
+      x: centerX + (Math.random() - 0.5) * width * 0.65,
+      y: centerY + (Math.random() - 0.5) * height * 0.5,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 1.5,
+      gravity: 0.12 + Math.random() * 0.12,
+      life,
+      maxLife: life,
+      size: 1 + Math.random() * 2,
+      color: Math.random() > 0.5 ? "#ffb347" : "#fff0c2"
+    };
+  }
+
+  function drawSpark(spark) {
+    const alpha = Math.max(0, spark.life / spark.maxLife);
+
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = spark.color;
+    ctx.lineWidth = spark.size;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "#ff8a32";
+    ctx.beginPath();
+    ctx.moveTo(spark.x, spark.y);
+    ctx.lineTo(
+      spark.x - spark.vx * 2.5,
+      spark.y - spark.vy * 2.5
+    );
+    ctx.stroke();
+
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+  }
+
+  function animate(timestamp) {
+    if (!startTime) startTime = timestamp;
+
+    const elapsed = timestamp - startTime;
+
+    ctx.clearRect(0, 0, width, height);
+
+    if (elapsed < 1800 && Math.random() < 0.85) {
+      for (let i = 0; i < 3; i++) {
+        particles.push(createSpark());
+      }
     }
-  }, { passive: true });
 
-  showWork(0);
-}
+    particles = particles.filter((spark) => spark.life > 0);
+
+    particles.forEach((spark) => {
+      spark.x += spark.vx;
+      spark.y += spark.vy;
+      spark.vy += spark.gravity;
+      spark.vx *= 0.985;
+      spark.life--;
+
+      drawSpark(spark);
+    });
+
+    if (elapsed < 2600 || particles.length > 0) {
+      animationFrame = requestAnimationFrame(animate);
+    } else {
+      ctx.clearRect(0, 0, width, height);
+      animationFrame = null;
+    }
+  }
+
+  function startAnimation() {
+    if (started) return;
+    started = true;
+
+    resizeCanvas();
+    heading.classList.add("revealed");
+    animationFrame = requestAnimationFrame(animate);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      startAnimation();
+      observer.disconnect();
+    }
+  }, { threshold: 0.35 });
+
+  observer.observe(heading);
+
+  window.addEventListener("resize", () => {
+    if (started && animationFrame !== null) {
+      resizeCanvas();
+    }
+  });
+})();
