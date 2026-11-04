@@ -140,11 +140,18 @@ createCarousel({
    Смена фоновых изображений первого экрана
    ========================================================= */
 (() => {
-  const images = document.querySelectorAll(".hero-image");
+  const images = Array.from(document.querySelectorAll(".hero-image"));
 
   if (images.length < 2) return;
 
-  let currentIndex = 0;
+  let currentIndex = images.findIndex((image) =>
+    image.classList.contains("active")
+  );
+
+  if (currentIndex === -1) {
+    currentIndex = 0;
+    images[currentIndex].classList.add("active");
+  }
 
   setInterval(() => {
     images[currentIndex].classList.remove("active");
@@ -152,7 +159,7 @@ createCarousel({
     currentIndex = (currentIndex + 1) % images.length;
 
     images[currentIndex].classList.add("active");
-  }, 3000);
+  }, 5000);
 })();
 /* =========================================================
    Анимация сварочных искр в заголовке работ
