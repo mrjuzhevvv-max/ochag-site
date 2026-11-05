@@ -6,116 +6,271 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Согласие на обработку персональных данных мастерской Очаг.">
   <title>Согласие на обработку персональных данных — Очаг</title>
+
   <link rel="stylesheet" href="style.css">
 
   <style>
     .legal-page {
-      max-width: 900px;
+      width: min(900px, 100%);
       margin: 0 auto;
-      padding: 60px 24px 100px;
-      color: #fff;
-      line-height: 1.7;
+      padding: 65px 24px 100px;
+      color: var(--text);
+    }
+
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 55px;
+      color: var(--muted);
+      font-size: 13px;
+      transition: color .2s ease;
+    }
+
+    .legal-back:hover {
+      color: var(--accent);
+    }
+
+    .legal-label {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
     }
 
     .legal-page h1 {
-      font-size: 32px;
+      max-width: 760px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -2px;
       margin-bottom: 35px;
+      color: #fff;
     }
 
-    .legal-page h2 {
-      font-size: 20px;
-      margin: 30px 0 12px;
-      color: #f28c28;
+    .legal-intro {
+      padding: 25px 28px;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      margin-bottom: 35px;
     }
 
     .legal-page p,
     .legal-page li {
+      color: #c5c5c0;
       font-size: 14px;
-      color: #d0d0d0;
+      line-height: 1.9;
     }
 
-    .legal-page a {
-      color: #f28c28;
+    .legal-page p {
+      margin-bottom: 16px;
     }
 
-    .legal-back {
-      display: inline-block;
-      margin-bottom: 35px;
+    .legal-page ul {
+      padding-left: 22px;
+      margin: 12px 0 20px;
+    }
+
+    .legal-page li {
+      padding-left: 5px;
+      margin-bottom: 7px;
+    }
+
+    .legal-section {
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .legal-page h2 {
+      color: var(--accent);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    .legal-page a:not(.legal-back) {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(223, 129, 75, .4);
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
+      transition: color .2s ease;
+    }
+
+    .legal-page a:not(.legal-back):hover {
+      color: #fff;
+    }
+
+    .legal-footer {
+      padding-top: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .legal-footer p {
+      color: var(--muted);
+      font-size: 11px;
+      margin: 0;
+    }
+
+    .legal-home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 19px;
+      background: var(--accent);
+      color: #171411 !important;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none !important;
+      transition: background .2s ease;
+    }
+
+    .legal-home:hover {
+      background: #f19a68;
+    }
+
+    @media (max-width: 600px) {
+      .legal-page {
+        padding: 40px 20px 65px;
+      }
+
+      .legal-back {
+        margin-bottom: 40px;
+      }
+
+      .legal-page h1 {
+        font-size: 34px;
+        letter-spacing: -1.5px;
+      }
+
+      .legal-intro {
+        padding: 20px;
+      }
+
+      .legal-page p,
+      .legal-page li {
+        font-size: 13px;
+      }
+
+      .legal-page h2 {
+        font-size: 16px;
+      }
+
+      .legal-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <header class="header">
+    <a href="index.html" class="logo">О<span>Ч</span>АГ</a>
+    <a href="index.html" class="header-button">НА ГЛАВНУЮ</a>
+  </header>
+
   <main class="legal-page">
 
-    <a class="legal-back" href="index.html">← Вернуться на главную</a>
+    <a class="legal-back" href="index.html">
+      ← Вернуться на главную
+    </a>
+
+    <div class="legal-label">ДОКУМЕНТЫ</div>
 
     <h1>Согласие на обработку персональных данных</h1>
 
-    <p>
-      Я, заполняя и отправляя форму на сайте мастерской «Очаг»,
-      свободно, своей волей и в своём интересе предоставляю
-      согласие Маркову Егору Владимировичу, физическому лицу,
-      применяющему специальный налоговый режим
-      «Налог на профессиональный доход» (самозанятому без статуса ИП),
-      ИНН 561004195107, на обработку моих персональных данных.
-    </p>
+    <div class="legal-intro">
+      <p>
+        Я, заполняя и отправляя форму на сайте мастерской «Очаг»,
+        свободно, своей волей и в своём интересе предоставляю
+        согласие Маркову Егору Владимировичу, физическому лицу,
+        применяющему специальный налоговый режим
+        «Налог на профессиональный доход» (самозанятому без статуса ИП),
+        ИНН 561004195107, на обработку моих персональных данных.
+      </p>
+    </div>
 
-    <h2>1. Перечень персональных данных</h2>
+    <section class="legal-section">
+      <h2>1. Перечень персональных данных</h2>
 
-    <p>Согласие распространяется на обработку следующих данных:</p>
+      <p>Согласие распространяется на обработку следующих данных:</p>
 
-    <ul>
-      <li>имя;</li>
-      <li>номер телефона;</li>
-      <li>сведения, указанные мной в поле описания заказа.</li>
-    </ul>
+      <ul>
+        <li>имя;</li>
+        <li>номер телефона;</li>
+        <li>сведения, указанные мной в поле описания заказа.</li>
+      </ul>
+    </section>
 
-    <h2>2. Цели обработки</h2>
+    <section class="legal-section">
+      <h2>2. Цели обработки</h2>
 
-    <ul>
-      <li>приём и обработка моей заявки;</li>
-      <li>связь со мной для обсуждения заказа;</li>
-      <li>уточнение характеристик и стоимости работ;</li>
-      <li>подготовка предложения и исполнение договорённостей.</li>
-    </ul>
+      <ul>
+        <li>приём и обработка моей заявки;</li>
+        <li>связь со мной для обсуждения заказа;</li>
+        <li>уточнение характеристик и стоимости работ;</li>
+        <li>подготовка предложения и исполнение договорённостей.</li>
+      </ul>
+    </section>
 
-    <h2>3. Действия с персональными данными</h2>
+    <section class="legal-section">
+      <h2>3. Действия с персональными данными</h2>
 
-    <p>
-      Я даю согласие на сбор, запись, систематизацию, накопление,
-      хранение, уточнение, использование, передачу в случаях,
-      предусмотренных законом, блокирование и удаление
-      персональных данных.
-    </p>
+      <p>
+        Я даю согласие на сбор, запись, систематизацию, накопление,
+        хранение, уточнение, использование, передачу в случаях,
+        предусмотренных законом, блокирование и удаление
+        персональных данных.
+      </p>
+    </section>
 
-    <h2>4. Срок действия согласия</h2>
+    <section class="legal-section">
+      <h2>4. Срок действия согласия</h2>
 
-    <p>
-      Согласие действует до достижения целей обработки либо
-      до его отзыва, если иное основание для продолжения
-      обработки не предусмотрено законодательством.
-    </p>
+      <p>
+        Согласие действует до достижения целей обработки либо
+        до его отзыва, если иное основание для продолжения
+        обработки не предусмотрено законодательством.
+      </p>
+    </section>
 
-    <h2>5. Отзыв согласия</h2>
+    <section class="legal-section">
+      <h2>5. Отзыв согласия</h2>
 
-    <p>
-      Я могу отозвать согласие, направив обращение оператору
-      на электронную почту:
-      <a href="mailto:Mr.juzhev.vv@gmail.com">
-        Mr.juzhev.vv@gmail.com
-      </a>.
-    </p>
+      <p>
+        Я могу отозвать согласие, направив обращение оператору
+        на электронную почту:
+        <a href="mailto:Mr.juzhev.vv@gmail.com">
+          Mr.juzhev.vv@gmail.com
+        </a>.
+      </p>
+    </section>
 
-    <h2>6. Подтверждение согласия</h2>
+    <section class="legal-section">
+      <h2>6. Подтверждение согласия</h2>
 
-    <p>
-      Отправляя форму с установленной отметкой о согласии,
-      я подтверждаю, что ознакомился(-ась) с настоящим документом
-      и даю согласие на обработку перечисленных персональных данных
-      для указанных целей.
-    </p>
+      <p>
+        Отправляя форму с установленной отметкой о согласии,
+        я подтверждаю, что ознакомился(-ась) с настоящим документом
+        и даю согласие на обработку перечисленных персональных данных
+        для указанных целей.
+      </p>
+    </section>
+
+    <div class="legal-footer">
+      <p>Мастерская «Очаг» · Персональные данные</p>
+      <a href="index.html" class="legal-home">
+        Вернуться на сайт →
+      </a>
+    </div>
 
   </main>
 

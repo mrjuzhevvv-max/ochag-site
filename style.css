@@ -1,4 +1,3 @@
-
 :root {
   --bg: #171817;
   --surface: #20221f;
@@ -735,9 +734,45 @@ footer p {
   }
 }
 
+/* Мобильная версия блока «Наши работы» */
+
+@media (max-width: 768px) {
+  .works {
+    padding: 65px 5%;
+  }
+
+  .works-carousel {
+    margin-top: 25px;
+  }
+
+  .works-window {
+    width: calc(100% - 76px);
+    height: 380px;
+  }
+
+  .works-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 23px;
+  }
+}
+
 @media (max-width: 480px) {
   .works-window {
-    height: 300px;
+    height: 75vh;
+    min-height: 500px;
+    max-height: 750px;
+  }
+
+  .work-slide {
+    width: 100%;
+    height: 100%;
+  }
+
+  .work-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .works-arrow {
@@ -746,7 +781,6 @@ footer p {
     font-size: 21px;
   }
 }
-
 
 
 /* ---------- Контакты ---------- */
@@ -762,16 +796,18 @@ footer p {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 25px;
-  align-items: start;
-  text-align: left;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
 }
 
 .contacts-heading {
-  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   text-align: left;
-  margin-bottom: 15px;
+  margin: 0;
 }
 
 .contacts-heading h2 {
@@ -783,15 +819,38 @@ footer p {
 .contacts-heading span,
 .contacts-item span {
   display: block;
-  color: #f28c28;
+  color: var(--accent);
   font-size: 10px;
   letter-spacing: 1.3px;
   font-weight: 700;
+}
+
+.contacts-heading span {
   margin-bottom: 12px;
 }
 
+/* Контактные данные */
+
+.contacts-list {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .contacts-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
   min-width: 0;
+}
+
+.contacts-item span {
+  text-align: right;
+  margin: 0;
 }
 
 .contacts-item a,
@@ -801,12 +860,12 @@ footer p {
   line-height: 1.6;
   overflow-wrap: anywhere;
   margin: 0;
+  text-align: left;
 }
 
 .contacts-item a:hover {
-  color: #f28c28;
+  color: var(--accent);
 }
-
 
 /* ---------- Адаптация ---------- */
 
@@ -829,6 +888,10 @@ footer p {
 
   .service-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contacts-container {
+    gap: 30px;
   }
 }
 
@@ -873,8 +936,6 @@ footer p {
     max-height: 520px;
   }
 
-
-
   .works h2 {
     font-size: 30px;
   }
@@ -890,14 +951,7 @@ footer p {
   .works-arrow.next {
     right: 15px;
   }
-
-  .contacts-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 35px 20px;
-  }
 }
-
-@media (max-width: 680px) {
 
 @media (max-width: 680px) {
   .header {
@@ -1003,55 +1057,168 @@ footer p {
   }
 
   .contacts {
-    padding: 45px 20px;
+    padding: 55px 20px;
   }
 
   .contacts-container {
     grid-template-columns: 1fr;
+    gap: 35px;
   }
 
-  .contacts-heading h2 {
-    font-size: 30px;
-  }
-  @media (max-width: 1000px) {
-  .contacts-container {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 680px) {
-  .contacts-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px 18px;
+  .contacts-list {
+    width: 100%;
+    max-width: 500px;
+    gap: 12px;
   }
 
-  .contacts-heading h2 {
-    font-size: 30px;
+  .contacts-item {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 10px;
+  }
+
+  .contacts-item span {
+    font-size: 9px;
+    letter-spacing: 1px;
   }
 
   .contacts-item a,
   .contacts-item p {
     font-size: 12px;
   }
-}
-@media (max-width: 1000px) {
-  .contacts-container {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 680px) {
-  .contacts-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px 18px;
-  }
 
   .contacts-heading h2 {
     font-size: 30px;
   }
+}
 
-  .contacts-item a,
-  .contacts-item p {
-    font-size: 12px;
+
+/* ---------- Согласие на обработку персональных данных ---------- */
+
+.request .consent-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  cursor: pointer;
+  margin: 4px 0;
+}
+
+/* Квадрат выбора */
+
+.request .consent-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 17px;
+  width: 17px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0;
+  margin: 2px 0 0;
+  background: #555555;
+  border: 1px solid #777777;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Оранжевая галочка */
+
+.request .consent-checkbox input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Подсветка при фокусе */
+
+.request .consent-checkbox input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Текст согласия */
+
+.request .consent-checkbox span {
+  display: block;
+  min-width: 0;
+  color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  line-height: 1.8;
+}
+
+/* Гиперссылки */
+
+.request .consent-checkbox a {
+  color: var(--accent);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.request .consent-checkbox a:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Мобильная версия */
+
+@media (max-width: 680px) {
+  .request .consent-checkbox {
+    gap: 10px;
   }
+
+  .request .consent-checkbox span {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+}
+.contacts-container {
+  position: relative;
+}
+
+.contacts-container::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 50%;
+  width: 1px;
+  background: #444444;
+  transform: translateX(-50%);
+}
+@media (max-width: 680px) {
+  .contacts-container::after {
+    display: none;
+  }
+}
+/* ---------- Закрепление шапки при прокрутке ---------- */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #171817;
+}
+/* Центрирование всей навигации */
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  margin: 0 auto;
 }
